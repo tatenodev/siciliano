@@ -5,7 +5,7 @@
     "import/order": [
       "warn",
       {
-        "groups": ["index", "sibling", "parent", "internal", "external", "builtin", "object", "type"],
+        "groups": ["builtin", "external", "internal", "parent", "sibling", "index", "object", "type"],
         "newlines-between": "always"
       }
     ]
