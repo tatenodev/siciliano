@@ -1,12 +1,17 @@
-import { Button, Text } from "@radix-ui/themes";
+import { Flex, Heading } from "@radix-ui/themes";
+
+import { ArticleCard } from "./components/ArticleCard";
 
 export function Home() {
   return (
     <main>
-      <Text color="blue" size="6">
-        home
-      </Text>
-      <Button>button</Button>
+      <Heading align="center" mb="5" color="blue" size="6">
+        siciliano
+      </Heading>
+      <Flex align="center" direction="column">
+        <ArticleCard />
+        <ArticleCard />
+      </Flex>
     </main>
   );
 }
