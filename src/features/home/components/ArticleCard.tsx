@@ -46,7 +46,6 @@ export function ArticleCard() {
             style={{ width: "100%", height: "100%", display: "block", objectFit: "contain" }}
             width={100}
             height={100}
-            objectFit="cover"
           />
         </Box>
       </Flex>
