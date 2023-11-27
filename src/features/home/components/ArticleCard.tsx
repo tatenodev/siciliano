@@ -10,7 +10,7 @@ export function ArticleCard() {
           target="_blank"
           style={{ position: "absolute", inset: 0 }}
         />
-        <Box pr={{ initial: "0", sm: "3" }}>
+        <Box>
           <Heading
             as="h2"
             style={{
@@ -39,11 +39,11 @@ export function ArticleCard() {
             <Badge>Shared: 2023-11-26</Badge>
           </Box>
         </Box>
-        <Box shrink="0" style={{ maxWidth: "230px", height: "120px" }}>
+        <Box shrink="0" style={{ maxWidth: "230px", height: "120px", marginLeft: "6px" }}>
           <Image
             src="https://picsum.photos/700/300"
             alt=""
-            style={{ width: "100%", height: "100%", display: "block", paddingLeft: "6px", objectFit: "contain" }}
+            style={{ width: "100%", height: "100%", display: "block", objectFit: "contain" }}
             width={100}
             height={100}
             objectFit="cover"
