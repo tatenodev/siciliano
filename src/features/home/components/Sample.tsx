@@ -1,6 +1,6 @@
 "use client";
 
-import { sampleAction } from "../serverAction/sample";
+import { sampleAction } from "../serverActions/sample";
 
 export function Sample() {
   return (

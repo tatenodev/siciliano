@@ -1,8 +1,21 @@
 "use client";
 
+import { useState } from "react";
 import { Button, Flex, Heading, Dialog, Text, TextField } from "@radix-ui/themes";
 
+import { shareArticle } from "../serverActions/shareArticle";
+
 export function Header() {
+  const [shareUrl, setShareUrl] = useState("");
+  const [shareComment, setShareComment] = useState("");
+
+  const handleShare = async () => {
+    const res = await shareArticle({ url: shareUrl, comment: shareComment });
+    console.log(`res: ${res}`);
+    setShareUrl("");
+    setShareComment("");
+  };
+
   return (
     <header style={{ display: "flex", justifyContent: "center" }}>
       <Flex style={{ maxWidth: "800px", width: "100%" }} justify="between">
@@ -26,13 +39,21 @@ export function Header() {
                 <Text as="div" size="2" mb="1" weight="bold">
                   URL
                 </Text>
-                <TextField.Input defaultValue="" placeholder="https://" />
+                <TextField.Input
+                  defaultValue={shareUrl}
+                  onChange={(e) => setShareUrl(e.target.value)}
+                  placeholder="https://"
+                />
               </label>
               <label>
                 <Text as="div" size="2" mb="1" weight="bold">
                   Comment
                 </Text>
-                <TextField.Input defaultValue="" placeholder="どんな記事だった？" />
+                <TextField.Input
+                  defaultValue={shareComment}
+                  onChange={(e) => setShareComment(e.target.value)}
+                  placeholder="記事についてのコメントを書こう"
+                />
               </label>
             </Flex>
 
@@ -43,7 +64,7 @@ export function Header() {
                 </Button>
               </Dialog.Close>
               <Dialog.Close>
-                <Button>Post</Button>
+                <Button onClick={handleShare}>Post</Button>
               </Dialog.Close>
             </Flex>
           </Dialog.Content>
