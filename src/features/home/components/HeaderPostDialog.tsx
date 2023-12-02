@@ -3,7 +3,7 @@
 import { Dispatch, MouseEvent, SetStateAction, useState } from "react";
 import { Button, Flex, Dialog, Text, TextField } from "@radix-ui/themes";
 
-import { shareArticle } from "../serverActions/article";
+import { postArticle } from "../serverActions/article";
 
 type User = {
   name: string;
@@ -93,7 +93,7 @@ const ArticleInputContent = () => {
       alert("URLを入力してください");
       return;
     }
-    const res = await shareArticle({ url: shareUrl, comment: shareComment });
+    const res = await postArticle({ url: shareUrl, comment: shareComment });
     setShareUrl("");
     setShareComment("");
   };

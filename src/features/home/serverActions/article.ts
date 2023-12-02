@@ -1,8 +1,9 @@
 "use server";
 
 import { PrismaClient } from "@prisma/client";
+import { load } from "cheerio";
 
-type ShareArticleProps = {
+type PostArticleProps = {
   url: string;
   comment: string;
 };
@@ -14,7 +15,15 @@ export const getArticles = async () => {
   return { articles };
 };
 
-export const shareArticle = async ({ url, comment }: ShareArticleProps) => {
+export const postArticle = async ({ url, comment }: PostArticleProps) => {
+  const response = await fetch(url);
+  const text = await response.text();
+  console.log(text);
+
+  const $ = load(text);
+};
+
+export const shareArticle = async ({ url, comment }: PostArticleProps) => {
   console.log("shareArticle", url, comment);
 
   return "success";
