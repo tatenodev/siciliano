@@ -1,6 +1,6 @@
 "use client";
 
-import { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, MouseEvent, SetStateAction, useState } from "react";
 import { Button, Flex, Dialog, Text, TextField } from "@radix-ui/themes";
 
 import { shareArticle } from "../serverActions/shareArticle";
@@ -81,7 +81,18 @@ const ArticleInputContent = () => {
   const [shareUrl, setShareUrl] = useState("");
   const [shareComment, setShareComment] = useState("");
 
-  const handleShare = async () => {
+  const handleShare = async (e: MouseEvent<HTMLButtonElement>) => {
+    if (shareUrl === "") {
+      e.preventDefault();
+      alert("URLを入力してください");
+      return;
+    }
+    const urlRegex = /^(https?:\/\/)/;
+    if (!urlRegex.test(shareUrl)) {
+      e.preventDefault();
+      alert("URLを入力してください");
+      return;
+    }
     const res = await shareArticle({ url: shareUrl, comment: shareComment });
     setShareUrl("");
     setShareComment("");
