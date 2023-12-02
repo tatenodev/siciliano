@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -8,4 +5,16 @@ generator client {
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model Articles {
+  id          BigInt   @id(map: "Article_pkey") @default(autoincrement())
+  created_at  DateTime @default(now()) @db.Timestamptz(6)
+  url         String
+  description String?  @default("")
+  user        String   @default("") @db.VarChar
+  comment     String?  @default("")
+  title       String   @default("")
+  image_url   String?
 }

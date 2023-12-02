@@ -3,15 +3,19 @@ import { Flex } from "@radix-ui/themes";
 import { ArticleCard } from "./components/ArticleCard";
 import { Header } from "./components/Header";
 import { Sample } from "./components/Sample";
+import { getArticles } from "./serverActions/article";
 
-export function Home() {
+export async function Home() {
+  const { articles } = await getArticles();
+
   return (
     <>
       <Header />
       <main>
         <Flex align="center" direction="column">
-          <ArticleCard />
-          <ArticleCard />
+          {articles.map((article) => (
+            <ArticleCard key={article.id} article={article} />
+          ))}
         </Flex>
         <Sample />
       </main>

@@ -3,7 +3,7 @@
 import { Dispatch, MouseEvent, SetStateAction, useState } from "react";
 import { Button, Flex, Dialog, Text, TextField } from "@radix-ui/themes";
 
-import { shareArticle } from "../serverActions/shareArticle";
+import { shareArticle } from "../serverActions/article";
 
 type User = {
   name: string;
