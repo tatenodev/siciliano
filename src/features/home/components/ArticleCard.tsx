@@ -1,4 +1,4 @@
-import { Badge, Box, Card, Flex, Heading, Separator, Text, Link } from "@radix-ui/themes";
+import { Badge, Box, Card, Flex, Heading, Separator, Text } from "@radix-ui/themes";
 import Image from "next/image";
 
 export function ArticleCard() {
