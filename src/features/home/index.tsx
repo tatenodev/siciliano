@@ -2,7 +2,6 @@ import { Flex } from "@radix-ui/themes";
 
 import { ArticleCard } from "./components/ArticleCard";
 import { Header } from "./components/Header";
-import { Sample } from "./components/Sample";
 import { getArticles } from "./serverActions/article";
 
 export async function Home() {
@@ -17,7 +16,6 @@ export async function Home() {
             <ArticleCard key={article.id} article={article} />
           ))}
         </Flex>
-        <Sample />
       </main>
     </>
   );
