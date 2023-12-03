@@ -18,6 +18,7 @@ const getUser = () => {
 export function HeaderPostDialog() {
   const [localUser, setLocalUser] = useState<User | null>(null);
   const [inputName, setInputName] = useState("");
+  const [isPosting, setIsPosting] = useState(false);
 
   const handleUserName = () => {
     const user = getUser();
@@ -27,11 +28,13 @@ export function HeaderPostDialog() {
   return (
     <Dialog.Root>
       <Dialog.Trigger>
-        <Button onClick={handleUserName}>Add</Button>
+        <Button onClick={handleUserName} disabled={isPosting}>
+          {isPosting ? "Posting..." : "Add"}
+        </Button>
       </Dialog.Trigger>
       <Dialog.Content style={{ maxWidth: 450 }}>
         {localUser?.name ? (
-          <ArticleInputContent />
+          <ArticleInputContent setIsPosting={setIsPosting} />
         ) : (
           <UserNameInputContent inputName={inputName} setInputName={setInputName} setLocalUser={setLocalUser} />
         )}
@@ -82,11 +85,16 @@ const UserNameInputContent = ({ inputName, setInputName, setLocalUser }: UserNam
   );
 };
 
-const ArticleInputContent = () => {
+type ArticleInputContentProps = {
+  setIsPosting: Dispatch<SetStateAction<boolean>>;
+};
+
+const ArticleInputContent = ({ setIsPosting }: ArticleInputContentProps) => {
   const [shareUrl, setShareUrl] = useState("");
   const [shareComment, setShareComment] = useState("");
 
   const handleShare = async (e: MouseEvent<HTMLButtonElement>) => {
+    setIsPosting(true);
     const user = getUser();
     if (!user?.name || user.name === "") {
       e.preventDefault();
@@ -108,6 +116,7 @@ const ArticleInputContent = () => {
     const res = await postArticle({ userName: user.name, url: shareUrl, comment: shareComment });
     setShareUrl("");
     setShareComment("");
+    setIsPosting(false);
   };
   return (
     <>
