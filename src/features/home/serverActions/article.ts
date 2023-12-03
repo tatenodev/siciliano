@@ -13,7 +13,11 @@ type PostArticleProps = {
 const prisma = new PrismaClient();
 
 export const getArticles = async () => {
-  const articles = await prisma.articles.findMany();
+  const articles = await prisma.articles.findMany({
+    orderBy: {
+      created_at: "desc",
+    },
+  });
   return { articles };
 };
 
@@ -35,6 +39,7 @@ export const postArticle = async ({ userName, url, comment }: PostArticleProps) 
       image_url,
     },
   });
+  /* @see https://nextjs.org/docs/app/building-your-application/data-fetching/forms-and-mutations */
   revalidatePath("/");
 };
 

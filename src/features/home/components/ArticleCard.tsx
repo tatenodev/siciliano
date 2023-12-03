@@ -45,7 +45,17 @@ export function ArticleCard({ article }: ArticleCardProps) {
             {article.description}
           </Text>
           <Box>
-            <Badge>Shared: {article.created_at.toString()}</Badge>
+            <Badge>
+              Shared:{" "}
+              {article.created_at
+                .toLocaleDateString("ja-JP", {
+                  year: "numeric",
+                  month: "2-digit",
+                  day: "2-digit",
+                })
+                .split("/")
+                .join("-")}
+            </Badge>
           </Box>
         </Box>
         <Box shrink="0" style={{ maxWidth: "230px", height: "120px", marginLeft: "6px" }}>
