@@ -16,8 +16,8 @@ type ArticleCardProps = {
 
 export function ArticleCard({ article }: ArticleCardProps) {
   return (
-    <Card style={{ minWidth: "350px", maxWidth: "800px", marginBottom: "24px" }}>
-      <Flex style={{ position: "relative", overflow: "hidden", height: "140px" }} align="center">
+    <Card style={{ minWidth: "350px", maxWidth: "800px", width: "100%", marginBottom: "24px" }}>
+      <Flex style={{ position: "relative", overflow: "hidden", height: "140px" }} align="center" justify="between">
         <a href={article.url} target="_blank" style={{ position: "absolute", inset: 0 }} />
         <Box>
           <Heading
