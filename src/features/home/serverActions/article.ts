@@ -4,6 +4,7 @@ import { PrismaClient } from "@prisma/client";
 import { load } from "cheerio";
 
 type PostArticleProps = {
+  userName: string;
   url: string;
   comment: string;
 };
@@ -15,12 +16,25 @@ export const getArticles = async () => {
   return { articles };
 };
 
-export const postArticle = async ({ url, comment }: PostArticleProps) => {
+export const postArticle = async ({ userName, url, comment }: PostArticleProps) => {
   const response = await fetch(url);
-  const text = await response.text();
-  console.log(text);
-
-  const $ = load(text);
+  const html = await response.text();
+  const $ = load(html);
+  const title = $("head title").text();
+  const description = $("meta[name*='description']").attr("content");
+  const image_url = $("meta[property*='og:image']").attr("content");
+  const res = await prisma.articles.create({
+    data: {
+      created_at: new Date(),
+      url,
+      title,
+      user: userName,
+      description,
+      comment,
+      image_url,
+    },
+  });
+  console.log("res", res);
 };
 
 export const shareArticle = async ({ url, comment }: PostArticleProps) => {

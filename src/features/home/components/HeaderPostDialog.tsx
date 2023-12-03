@@ -9,13 +9,18 @@ type User = {
   name: string;
 };
 
+const getUser = () => {
+  const userStringify = window.localStorage.getItem("user");
+  const user: User | null = userStringify ? JSON.parse(userStringify) : null;
+  return user;
+};
+
 export function HeaderPostDialog() {
   const [localUser, setLocalUser] = useState<User | null>(null);
   const [inputName, setInputName] = useState("");
 
   const handleUserName = () => {
-    const userStringify = window.localStorage.getItem("user");
-    const user: User | null = userStringify ? JSON.parse(userStringify) : null;
+    const user = getUser();
     setLocalUser(user);
   };
 
@@ -82,6 +87,12 @@ const ArticleInputContent = () => {
   const [shareComment, setShareComment] = useState("");
 
   const handleShare = async (e: MouseEvent<HTMLButtonElement>) => {
+    const user = getUser();
+    if (!user?.name || user.name === "") {
+      e.preventDefault();
+      alert("名前を設定してください");
+      return;
+    }
     if (shareUrl === "") {
       e.preventDefault();
       alert("URLを入力してください");
@@ -93,7 +104,8 @@ const ArticleInputContent = () => {
       alert("URLを入力してください");
       return;
     }
-    const res = await postArticle({ url: shareUrl, comment: shareComment });
+
+    const res = await postArticle({ userName: user.name, url: shareUrl, comment: shareComment });
     setShareUrl("");
     setShareComment("");
   };
