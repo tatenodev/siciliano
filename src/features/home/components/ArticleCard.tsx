@@ -58,13 +58,16 @@ export function ArticleCard({ article }: ArticleCardProps) {
             </Badge>
           </Box>
         </Box>
-        <Box shrink="0" style={{ maxWidth: "230px", height: "120px", marginLeft: "6px" }}>
+        <Box
+          shrink="0"
+          style={{ maxWidth: "230px", width: "100%", height: "120px", marginLeft: "6px", position: "relative" }}
+        >
           <Image
             src={article.image_url!}
             alt=""
             style={{ width: "100%", height: "100%", display: "block", objectFit: "contain" }}
-            width={100}
-            height={100}
+            fill
+            sizes="100%"
           />
         </Box>
       </Flex>
