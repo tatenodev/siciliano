@@ -69,7 +69,7 @@ export function ArticleCard({ article }: ArticleCardProps) {
           style={{ maxWidth: "230px", width: "100%", height: "120px", marginLeft: "6px", position: "relative" }}
         >
           <Image
-            src={article.image_url!}
+            src={article.image_url ?? "/noimage.png"}
             alt=""
             style={{ width: "100%", height: "100%", display: "block", objectFit: "contain" }}
             fill
