@@ -17,7 +17,12 @@ type ArticleCardProps = {
 export function ArticleCard({ article }: ArticleCardProps) {
   return (
     <Card style={{ minWidth: "350px", maxWidth: "800px", width: "100%", marginBottom: "24px" }}>
-      <Flex style={{ position: "relative", overflow: "hidden", height: "140px" }} align="center" justify="between">
+      <Flex
+        style={{ position: "relative", overflow: "hidden" }}
+        align="center"
+        justify="between"
+        direction={{ initial: "column-reverse", xs: "row" }}
+      >
         <a href={article.url} target="_blank" style={{ position: "absolute", inset: 0 }} />
         <Box>
           <Heading
@@ -60,6 +65,7 @@ export function ArticleCard({ article }: ArticleCardProps) {
         </Box>
         <Box
           shrink="0"
+          mb={{ initial: "2", xs: "0" }}
           style={{ maxWidth: "230px", width: "100%", height: "120px", marginLeft: "6px", position: "relative" }}
         >
           <Image
